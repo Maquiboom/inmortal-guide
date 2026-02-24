@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INMORTAL - Servidor Minecraft</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: #1a0000; /* fondo más oscuro rojo */
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Fondo animado */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 20% 20%, #ff4d4d33, transparent 40%),
+                radial-gradient(circle at 80% 80%, #ff1a1a33, transparent 40%);
+    animation: moveBackground 15s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes moveBackground {
+    from { transform: translate(0,0); }
+    to { transform: translate(-200px, -200px); }
+}
+
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #330000cc, #1a0000);
+    text-align: center;
+}
+
+header h1 {
+    font-size: 70px;
+    color: #ff3333; /* rojo brillante */
+    text-shadow: 0 0 20px #ff3333;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff3333; }
+    to { text-shadow: 0 0 30px #ff6666; }
+}
+
+header p {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #ff9999;
+}
+
+.btn {
+    margin-top: 30px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #ff3333, #990000);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff3333;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #330000dd;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+section {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 40px;
+    margin-bottom: 50px;
+    color: #ff4d4d;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.card {
+    background: #330000;
+    padding: 30px;
+    width: 280px;
+    border-radius: 15px;
+    transition: 0.4s;
+    border: 1px solid #ff333333;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px #ff3333;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #ff6666;
+}
+
+footer {
+    background: #1a0000;
+    padding: 20px;
+    text-align: center;
+    color: #ff9999;
+}
+
+/* Animación al hacer scroll */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="#modos">Modos</a>
+    <a href="#unete">Unirse</a>
+    <a href="#discord">Discord</a>
+</nav>
+
+<header>
+    <h1>INMORTAL</h1>
+    <p>Donde las leyendas nunca mueren</p>
+    <button class="btn" onclick="copiarIP()">Copiar IP</button>
+</header>
+
+<section id="modos" class="hidden">
+    <h2 class="section-title">Modos de Juego</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Survival</h3>
+            <p>Economía, clanes y aventuras épicas.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unete" class="hidden">
+    <h2 class="section-title">Únete Ahora</h2>
+    <p><strong>IP:</strong>inmortal.mcsh.io</p>
+    <p><strong>Versión:</strong> 1.21.11</p>
+</section>
+
+<section id="discord" class="hidden">
+    <h2 class="section-title">Comunidad Discord</h2>
+    <button class="btn" onclick="window.open('https://discord.gg/z4N93AscAq', '_blank')">Entrar a Discord</button>
+</section>
+
+<footer>
+    © 2026 INMORTAL Network - Todos los derechos reservados
+</footer>
+
+<script>
+function copiarIP() {
+    navigator.clipboard.writeText("inmortal.mcsh.io");
+    alert("IP copiada: inmortal.mcsh.io");
+}
+
+/* Animación al hacer scroll */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+});
+
+document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
